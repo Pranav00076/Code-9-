@@ -160,7 +160,7 @@ export default function Hero({ isDark }: HeroProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="mt-16 text-[10px] font-mono tracking-widest uppercase flex items-center gap-8 text-[#a1a1aa]"
+          className="mt-16 mb-24 text-[10px] font-mono tracking-widest uppercase flex items-center gap-8 text-[#a1a1aa]"
         >
           <span>PING: 14ms</span>
           <span>•</span>

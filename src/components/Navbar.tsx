@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Sun, Moon, Eye } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
   isDark: boolean;
@@ -21,11 +22,11 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
   }, []);
 
   const navLinks = [
-    { name: 'Manifesto', href: '#manifesto' },
-    { name: 'Services', href: '#services' },
-    { name: 'Nexus', href: '#nexus' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Benefits', href: '#benefits' }
+    { name: 'Home', href: '/' },
+    { name: 'Charts', href: '/charts' },
+    { name: 'Gaming', href: '/gaming' },
+    { name: 'Projects', href: '/#projects' },
+    { name: 'Benefits', href: '/#benefits' }
   ];
 
   const logoVariant = {
@@ -56,29 +57,33 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      <motion.a 
-        href="#"
-        onClick={handleLogoClick}
-        animate={clicks > 3 ? { rotate: 360, filter: 'hue-rotate(90deg)' } : {}}
-        transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
-        onAnimationComplete={() => { if (clicks > 3) setClicks(0) }}
+      <Link 
+        to="/"
+        onClick={handleLogoClick as any}
         className="logo font-display text-2xl font-black tracking-tight flex items-center select-none cursor-pointer hover:scale-105 transition-transform"
       >
-        <span className="text-brand-cyan mr-1 font-mono font-bold animate-pulse">{"{"}</span>
-        <span className={`${isDark ? 'text-[#F8FAFC]' : 'text-[#0A0A0A]'} font-extrabold mr-1 tracking-wider`}>CODE9</span>
-        <span className="text-brand-purple font-mono font-bold animate-pulse">{"}"}</span>
-      </motion.a>
+        <motion.div
+          animate={clicks > 3 ? { rotate: 360, filter: 'hue-rotate(90deg)' } : {}}
+          transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
+          onAnimationComplete={() => { if (clicks > 3) setClicks(0) }}
+          className="flex items-center"
+        >
+          <span className="text-brand-cyan mr-1 font-mono font-bold animate-pulse">{"{"}</span>
+          <span className={`${isDark ? 'text-[#F8FAFC]' : 'text-[#0A0A0A]'} font-extrabold mr-1 tracking-wider`}>CODE9</span>
+          <span className="text-brand-purple font-mono font-bold animate-pulse">{"}"}</span>
+        </motion.div>
+      </Link>
 
       <nav className="hidden md:flex items-center space-x-8">
         {navLinks.map((link) => (
-          <a
+          <Link
             key={link.name}
-            href={link.href}
+            to={link.href}
             className={`relative text-xs uppercase tracking-widest font-semibold ${isDark ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-black'} transition-colors duration-200 group py-2`}
           >
             {link.name}
             <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-cyan transition-all duration-300 group-hover:w-full" />
-          </a>
+          </Link>
         ))}
       </nav>
 
@@ -132,17 +137,21 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
             className={`absolute top-20 left-0 right-0 border-b flex flex-col p-6 z-40 md:hidden gap-4 ${isDark ? 'bg-[#0A0A0AC0] border-[#ffffff10] text-[#F8FAFC] backdrop-blur-xl' : 'bg-[#FAFAFAE0] border-[#00000010] text-[#0A0A0A] backdrop-blur-xl'}`}
           >
             {navLinks.map((link, idx) => (
-              <motion.a
+              <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.05 }}
                 key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`text-sm font-semibold tracking-wider uppercase py-2 border-b ${isDark ? 'border-gray-900 hover:text-brand-cyan' : 'border-gray-100 hover:text-brand-purple'} transition-colors`}
+                className="border-b border-gray-900 border-opacity-10 dark:border-opacity-50"
               >
-                {link.name}
-              </motion.a>
+                <Link
+                  to={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`block text-sm font-semibold tracking-wider uppercase py-2 ${isDark ? 'hover:text-brand-cyan' : 'hover:text-brand-purple'} transition-colors`}
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
             ))}
             <motion.a
               initial={{ opacity: 0 }}

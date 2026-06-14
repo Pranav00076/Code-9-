@@ -48,21 +48,20 @@ export default function CareerPath({ isDark }: CareerPathProps) {
     <section id="career-path" className="relative py-24 px-6 md:px-12 overflow-hidden z-25">
       <div className="max-w-7xl mx-auto relative">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-[150px] font-black font-display opacity-[0.02] pointer-events-none select-none tracking-widest uppercase z-0"
-        >
-          GROW
-        </motion.div>
-        
-        <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16 relative z-10"
         >
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 0.04, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="absolute -top-12 md:-top-20 left-1/2 transform -translate-x-1/2 text-[50px] sm:text-[80px] md:text-[140px] font-black font-display pointer-events-none select-none tracking-widest uppercase -z-10"
+          >
+            GROW
+          </motion.div>
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="w-6 h-[2px] bg-brand-blue" />
             <span className="text-[10px] font-mono tracking-widest text-brand-blue uppercase font-bold flex items-center gap-2">

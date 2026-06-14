@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Benefits from './components/Benefits';
-import CareerPath from './components/CareerPath';
+import Home from './components/Home';
+import ChartsSection from './components/ChartsSection';
+import GamingSection from './components/GamingSection';
 import ActivityFeed from './components/ActivityFeed';
-import Projects from './components/Projects';
-import ChallengeArena from './components/ChallengeArena';
-import Testimonials from './components/Testimonials';
-import JoinCTA from './components/JoinCTA';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import CursorTrail from './components/CursorTrail';
@@ -226,23 +221,11 @@ export default function App() {
             />
 
             <main className="flex-1">
-              <Hero isDark={isDark} />
-              
-              <About isDark={isDark} />
-              
-              <Services isDark={isDark} />
-              
-              <Benefits isDark={isDark} />
-              
-              <CareerPath isDark={isDark} />
-              
-              <Projects isDark={isDark} />
-              
-              <ChallengeArena isDark={isDark} />
-              
-              <Testimonials isDark={isDark} />
-              
-              <JoinCTA isDark={isDark} />
+              <Routes>
+                <Route path="/" element={<Home isDark={isDark} />} />
+                <Route path="/charts" element={<ChartsSection isDark={isDark} />} />
+                <Route path="/gaming" element={<GamingSection isDark={isDark} />} />
+              </Routes>
             </main>
 
             <Footer isDark={isDark} />

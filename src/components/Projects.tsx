@@ -29,18 +29,17 @@ export default function Projects({ isDark }: ProjectsProps) {
       <div className={`absolute top-0 right-1/4 w-96 h-96 rounded-full blur-[140px] opacity-10 pointer-events-none bg-brand-cyan/30`} />
 
       <div className="max-w-7xl mx-auto relative">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-[150px] font-black font-display opacity-[0.02] pointer-events-none select-none tracking-widest uppercase z-0"
-        >
-          BUILD
-        </motion.div>
-        
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 relative z-10">
-          <div>
+          <div className="relative">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 0.04, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="absolute -top-12 -left-4 md:-top-20 md:-left-12 text-[80px] md:text-[140px] font-black font-display pointer-events-none select-none tracking-widest uppercase -z-10"
+            >
+              BUILD
+            </motion.div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-[1px] bg-brand-cyan" />
               <span className="text-[10px] font-mono tracking-widest text-[#06B6D4] font-bold uppercase">Community Lab</span>
