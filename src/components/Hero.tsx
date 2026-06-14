@@ -8,7 +8,6 @@ interface HeroProps {
 }
 
 export default function Hero({ isDark }: HeroProps) {
-  // Animation presets
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -51,7 +50,6 @@ export default function Hero({ isDark }: HeroProps) {
 
   return (
     <section id="home" className="relative min-h-[95vh] flex items-center justify-center px-6 md:px-12 pt-32 overflow-hidden z-20">
-      {/* 3D Antigravity Interactive Starfield/Particulate Cluster */}
       <Antigravity 
         count={280}
         color={isDark ? '#06b6d4' : '#8b5cf6'}
@@ -65,10 +63,8 @@ export default function Hero({ isDark }: HeroProps) {
         opacity={0.6}
       />
 
-      {/* Background Animating Grid Pattern */}
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
       
-      {/* Glow Orbs conforming to Artistic Flair Blueprint */}
       <motion.div 
         variants={orbVariants}
         animate="float"
@@ -87,14 +83,12 @@ export default function Hero({ isDark }: HeroProps) {
         className="absolute w-[280px] md:w-[450px] h-[280px] md:h-[450px] rounded-full blur-[120px] top-[30%] left-[30%] bg-brand-cyan/15 pointer-events-none"
       />
 
-      {/* Main hero payload container */}
       <motion.div 
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="max-w-5xl mx-auto text-center z-10 flex flex-col items-center"
       >
-        {/* Futuristic Live Badge */}
         <motion.div 
           variants={itemVariants}
           className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-bold font-mono tracking-widest ${
@@ -107,7 +101,6 @@ export default function Hero({ isDark }: HeroProps) {
           <span>V 2.0.4 ACTIVE PROTOCOL</span>
         </motion.div>
 
-        {/* Dynamic Big Typography with staggered reveals */}
         <motion.h1 
           variants={itemVariants}
           className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[0.9] tracking-tighter mb-6 uppercase"
@@ -124,7 +117,6 @@ export default function Hero({ isDark }: HeroProps) {
           </span>
         </motion.h1>
 
-        {/* Futuristic Subtitle */}
         <motion.p 
           variants={itemVariants}
           className={`text-base sm:text-lg md:text-xl max-w-2xl px-2 font-sans font-light leading-relaxed mb-10 ${
@@ -134,12 +126,10 @@ export default function Hero({ isDark }: HeroProps) {
           Join <span className="font-semibold text-brand-cyan">Code9</span> — an exclusive multi-disciplinary ecosystem for vanguard developers, systems engineers, and digital architects preparing the autonomous future.
         </motion.p>
 
-        {/* CTAs with magnetic feedback & custom styled hovers */}
         <motion.div 
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center gap-4 justify-center w-full sm:w-auto"
         >
-          {/* Main Join Button */}
           <motion.a
             href="#join"
             whileHover={{ scale: 1.04, boxShadow: "0 0 30px rgba(6, 182, 212, 0.4)" }}
@@ -151,7 +141,6 @@ export default function Hero({ isDark }: HeroProps) {
             <ArrowRight className="w-4 h-4 ml-1" />
           </motion.a>
 
-          {/* Secondary Dossier Button */}
           <motion.a
             href="#services"
             whileHover={{ scale: 1.04, backgroundColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)" }}
@@ -167,7 +156,6 @@ export default function Hero({ isDark }: HeroProps) {
           </motion.a>
         </motion.div>
 
-        {/* Minimal decor ticker */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}
@@ -182,7 +170,6 @@ export default function Hero({ isDark }: HeroProps) {
         </motion.div>
       </motion.div>
 
-      {/* Futuristic bottom scroll indicators */}
       <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center select-none cursor-pointer text-[#a1a1aa]/50 hover:text-[#a1a1aa] transition-colors">
         <span className="text-[10px] font-mono tracking-widest uppercase mb-1">Scroll Nexus</span>
         <motion.div 

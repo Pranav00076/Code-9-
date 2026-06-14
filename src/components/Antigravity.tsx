@@ -67,13 +67,10 @@ const AntigravityInner = ({
   const lastMouseMoveTime = useRef(0);
   const virtualMouse = useRef({ x: 0, y: 0 });
   
-  // Custom window-level mouse coordinate tracker
-  // This allows the Canvas to remain pointer-events-none while still acting interactive!
   const windowMouse = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Normalize to [-1, 1] range to match R3F pointer coordinates
       const nx = (e.clientX / window.innerWidth) * 2 - 1;
       const ny = -(e.clientY / window.innerHeight) * 2 + 1;
       windowMouse.current.x = nx;

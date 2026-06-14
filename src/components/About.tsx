@@ -8,7 +8,6 @@ interface AboutProps {
 }
 
 export default function About({ isDark }: AboutProps) {
-  // Container motion options
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -28,7 +27,6 @@ export default function About({ isDark }: AboutProps) {
 
   return (
     <section id="manifesto" className="relative py-24 px-6 md:px-12 overflow-hidden z-25">
-      {/* Light subtle backdrop separator */}
       <div className={`absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[130px] opacity-15 pointer-events-none ${isDark ? 'bg-brand-purple' : 'bg-brand-purple/40'}`} />
 
       <div className="max-w-7xl mx-auto">
@@ -39,9 +37,7 @@ export default function About({ isDark }: AboutProps) {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
         >
-          {/* Left panel: Mission and Manifesto text */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            {/* Visual Mini Pre-title */}
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-[1px] bg-brand-cyan" />
               <span className="text-[10px] font-mono tracking-widest text-brand-cyan font-semibold uppercase">The Manifesto</span>
@@ -62,7 +58,6 @@ export default function About({ isDark }: AboutProps) {
               No dry lectures. No hypothetical assignments. We build actual systems, test them against severe production requirements, coordinate paid bounties, and cultivate 1-on-1 apprentice tunnels with industry champions.
             </p>
 
-            {/* Action Highlights */}
             <div className="grid grid-cols-2 gap-4">
               <div className={`p-4 rounded-xl border ${isDark ? 'border-gray-900 bg-black/40' : 'border-gray-200 bg-white/40'} backdrop-blur-md`}>
                 <div className="text-brand-purple font-mono font-bold text-xs mb-1">01 / REPUTATION</div>
@@ -75,10 +70,8 @@ export default function About({ isDark }: AboutProps) {
             </div>
           </div>
 
-          {/* Right panel: Static Bento Grid containing 3D Orbital system & stats cards */}
           <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6 relative">
             
-            {/* Center Orbital Vector Graphic Component */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-20 z-0">
               <motion.div 
                 animate={{ rotate: 360 }}
@@ -91,7 +84,6 @@ export default function About({ isDark }: AboutProps) {
               </motion.div>
             </div>
 
-            {/* Stats map */}
             {STATS_DATA.map((stat, idx) => (
               <motion.div
                 key={stat.id}
@@ -103,25 +95,20 @@ export default function About({ isDark }: AboutProps) {
                     : 'border-black/5 bg-white/70 hover:shadow-[0_12px_36px_rgba(139,92,246,0.1)] hover:border-brand-purple/40'
                 }`}
               >
-                {/* Visual Glass Line Header */}
                 <span className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-cyan to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
-                {/* Stat Icon */}
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 ${isDark ? 'bg-gray-900/80 text-brand-cyan' : 'bg-gray-100 text-brand-purple'}`}>
                   <LucideIcon name={stat.iconName} className="w-5 h-5" />
                 </div>
 
-                {/* Value */}
                 <div className="text-3xl md:text-4xl font-black font-display tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-purple mb-1">
                   {stat.value}
                 </div>
 
-                {/* Label */}
                 <div className={`text-xs font-semibold uppercase tracking-wider mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                   {stat.label}
                 </div>
 
-                {/* Subtitle */}
                 <div className={`text-xs font-light leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                   {stat.description}
                 </div>

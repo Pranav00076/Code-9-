@@ -8,7 +8,6 @@ interface BenefitsProps {
 }
 
 export default function Benefits({ isDark }: BenefitsProps) {
-  // Container transitions
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -27,12 +26,10 @@ export default function Benefits({ isDark }: BenefitsProps) {
 
   return (
     <section id="benefits" className="relative py-24 px-6 md:px-12 overflow-hidden z-25">
-      {/* Glow highlight */}
       <div className={`absolute bottom-0 left-10 w-96 h-96 rounded-full blur-[140px] opacity-10 pointer-events-none bg-brand-purple/40`} />
 
       <div className="max-w-7xl mx-auto relative">
         
-        {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-20">
           <div className="inline-flex items-center gap-2 mb-4">
             <span className="w-8 h-[1px] bg-brand-cyan" />
@@ -47,9 +44,7 @@ export default function Benefits({ isDark }: BenefitsProps) {
           </p>
         </div>
 
-        {/* Central timeline line (desktop only) */}
         <div className="absolute left-1/2 top-[240px] bottom-10 w-[2px] bg-gray-800 -translate-x-1/2 hidden lg:block z-0 pointer-events-none">
-          {/* Animated Connecting Line that fills on view */}
           <motion.div 
             variants={lineVariants}
             initial="hidden"
@@ -59,7 +54,6 @@ export default function Benefits({ isDark }: BenefitsProps) {
           />
         </div>
 
-        {/* Zig-Zag Timeline Rows */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -74,7 +68,6 @@ export default function Benefits({ isDark }: BenefitsProps) {
                 key={benefit.id}
                 className={`flex flex-col lg:flex-row items-stretch ${isEven ? '' : 'lg:flex-row-reverse'} gap-8 lg:gap-16 items-center`}
               >
-                {/* Left/Right Text Content Card */}
                 <div className="w-full lg:w-1/2 flex flex-col justify-center">
                   <motion.div
                     initial={{ opacity: 0, x: isEven ? -40 : 40 }}
@@ -87,24 +80,20 @@ export default function Benefits({ isDark }: BenefitsProps) {
                         : 'bg-white/90 border-black/5 hover:border-brand-blue/30 hover:shadow-xl'
                     }`}
                   >
-                    {/* Floating Step Number Badge */}
                     <div className="absolute -top-4 -right-4 font-mono font-black text-5xl md:text-6xl text-gray-500/10 pointer-events-none select-none">
                       {benefit.number}
                     </div>
 
-                    {/* Left Mini Highlights */}
                     <span className="inline-flex text-[9px] font-mono uppercase tracking-widest font-extrabold px-3 py-1 rounded bg-brand-cyan/10 text-brand-cyan mb-4">
                       {benefit.badge}
                     </span>
 
-                    {/* Headline */}
                     <h3 className={`text-xl sm:text-2xl font-bold font-display uppercase tracking-tight mb-4 ${
                       isDark ? 'text-white' : 'text-gray-900'
                     }`}>
                       {benefit.title}
                     </h3>
 
-                    {/* Paragraph */}
                     <p className={`text-sm font-light leading-relaxed ${
                       isDark ? 'text-gray-400' : 'text-gray-600'
                     }`}>
@@ -113,7 +102,6 @@ export default function Benefits({ isDark }: BenefitsProps) {
                   </motion.div>
                 </div>
 
-                {/* Center Timeline Node and Connecting Lines (For Mobile view left side, Desktop view middle) */}
                 <div className="hidden lg:flex items-center justify-center w-16 relative">
                   <motion.div 
                     initial={{ scale: 0, shadow: 'none' }}
@@ -131,7 +119,6 @@ export default function Benefits({ isDark }: BenefitsProps) {
                   </motion.div>
                 </div>
 
-                {/* Empty side for layout structural balance on desktop */}
                 <div className="hidden lg:block lg:w-1/2" />
               </div>
             );

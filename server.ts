@@ -3,17 +3,14 @@ import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
 
-// Load environment variables
 dotenv.config();
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // Body parser limit safe
   app.use(express.json());
 
-  // API Route: Secure Chatbot proxy for Hugging Face Router API
   app.post('/api/chatbot', async (req, res) => {
     try {
       const { messages } = req.body;
@@ -31,7 +28,6 @@ async function startServer() {
         return;
       }
 
-      // Inject system context to reinforce Code9 premium futuristic branding and guidelines
       const systemMessage = {
         role: "system",
         content: `You are the Code9 Cybernetic Assistant, a highly intelligent terminal entity for the "Code9 Community". 
@@ -80,12 +76,10 @@ You can talk about Code9's core features described below:
     }
   });
 
-  // Health-check API
   app.get('/api/health', (req, res) => {
     res.json({ status: 'active', node: 'NEXUS-9', uptime: process.uptime() });
   });
 
-  // Vite Integration for Serving UI Assets
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
       server: { middlewareMode: true },

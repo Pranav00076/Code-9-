@@ -44,13 +44,11 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
       }}
       className={`fixed top-0 left-0 right-0 h-20 flex items-center justify-between px-6 md:px-12 z-50 transition-all duration-300 border-b backdrop-blur-md`}
     >
-      {/* Scroll indicator line */}
       <div 
         className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-purple transition-all duration-100"
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      {/* Logo */}
       <motion.a 
         href="#"
         variants={logoVariant}
@@ -62,7 +60,6 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
         <span className="text-brand-purple font-mono font-bold animate-pulse">{"}"}</span>
       </motion.a>
 
-      {/* Desktop Navigation Links */}
       <nav className="hidden md:flex items-center space-x-8">
         {navLinks.map((link) => (
           <a
@@ -76,9 +73,7 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
         ))}
       </nav>
 
-      {/* Controls: Mode + CTA */}
       <div className="hidden md:flex items-center space-x-4">
-        {/* Theme Toggle Button */}
         <motion.button
           onClick={onToggleTheme}
           whileHover={{ scale: 1.1 }}
@@ -89,7 +84,6 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
           {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
         </motion.button>
 
-        {/* Enter Universe Button */}
         <motion.a
           href="#join"
           whileHover={{ scale: 1.05 }}
@@ -104,9 +98,7 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
         </motion.a>
       </div>
 
-      {/* Mobile Menu Action */}
       <div className="flex items-center space-x-3 md:hidden">
-        {/* Direct Mobile Theme Toggle */}
         <button
           onClick={onToggleTheme}
           className={`p-2 rounded-lg border ${isDark ? 'border-gray-800 bg-gray-900/60 text-brand-cyan' : 'border-gray-200 bg-gray-100 text-brand-purple'}`}
@@ -122,7 +114,6 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
         </button>
       </div>
 
-      {/* Mobile Menu Popup Drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div

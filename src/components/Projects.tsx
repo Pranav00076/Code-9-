@@ -26,12 +26,10 @@ export default function Projects({ isDark }: ProjectsProps) {
 
   return (
     <section id="projects" className="relative py-24 px-6 md:px-12 overflow-hidden z-25">
-      {/* Visual glowing separator */}
       <div className={`absolute top-0 right-1/4 w-96 h-96 rounded-full blur-[140px] opacity-10 pointer-events-none bg-brand-cyan/30`} />
 
       <div className="max-w-7xl mx-auto">
         
-        {/* Header containing inline arrows */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <div className="flex items-center gap-2 mb-4">
@@ -43,7 +41,6 @@ export default function Projects({ isDark }: ProjectsProps) {
             </h2>
           </div>
 
-          {/* Glowing Slide Triggers */}
           <div className="flex items-center space-x-3 self-start md:self-auto">
             <button
               onClick={() => scroll('left')}
@@ -70,7 +67,6 @@ export default function Projects({ isDark }: ProjectsProps) {
           </div>
         </div>
 
-        {/* Horizontal scroll track */}
         <div 
           ref={scrollRef}
           className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory no-scrollbar scroll-smooth"
@@ -87,7 +83,6 @@ export default function Projects({ isDark }: ProjectsProps) {
               }`}
             >
               <div>
-                {/* Thumbnail image and dynamic overlays */}
                 <div className="h-48 w-full relative overflow-hidden">
                   <img 
                     src={project.image} 
@@ -97,15 +92,12 @@ export default function Projects({ isDark }: ProjectsProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   
-                  {/* Floating index badges */}
                   <span className="absolute top-4 left-4 text-[10px] font-mono tracking-wider font-extrabold px-2.5 py-1 rounded bg-[#0A0A0ACC] text-brand-cyan border border-brand-cyan/20 backdrop-blur-md">
                     PROJECT {idx + 1}
                   </span>
                 </div>
 
-                {/* Body Content */}
                 <div className="p-6">
-                  {/* Tags */}
                   <div className="flex flex-wrap gap-1.5 mb-3">
                     {project.tags.map(tag => (
                       <span 
@@ -117,14 +109,12 @@ export default function Projects({ isDark }: ProjectsProps) {
                     ))}
                   </div>
 
-                  {/* Title */}
                   <h3 className={`text-lg font-bold font-display uppercase tracking-tight mb-2 ${
                     isDark ? 'text-white' : 'text-gray-900'
                   }`}>
                     {project.title}
                   </h3>
 
-                  {/* Description */}
                   <p className={`text-xs font-light leading-relaxed mb-4 ${
                     isDark ? 'text-gray-400' : 'text-gray-600'
                   }`}>
@@ -133,11 +123,9 @@ export default function Projects({ isDark }: ProjectsProps) {
                 </div>
               </div>
 
-              {/* Footer and Inspector Control */}
               <div className={`p-6 pt-0 flex items-center justify-between border-t border-solid-[1px] ${
                 isDark ? 'border-white/5' : 'border-black/5'
               }`}>
-                {/* Author node */}
                 <div className="flex items-center space-x-2">
                   <div className="w-5 h-5 rounded-full bg-gradient-to-r from-brand-blue to-brand-cyan" />
                   <span className={`text-[10px] font-mono tracking-wider ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -145,15 +133,12 @@ export default function Projects({ isDark }: ProjectsProps) {
                   </span>
                 </div>
 
-                {/* Inspect and Likes Callout */}
                 <div className="flex items-center space-x-3">
-                  {/* Like/Commit ticker */}
                   <span className="flex items-center gap-1 text-[10px] font-mono text-brand-cyan">
                     <Heart className="w-3.5 h-3.5 text-brand-purple fill-brand-purple" />
                     <span>{project.likes}</span>
                   </span>
 
-                  {/* Inspector Button */}
                   <button 
                     className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${
                       isDark 
@@ -169,7 +154,6 @@ export default function Projects({ isDark }: ProjectsProps) {
           ))}
         </div>
 
-        {/* Swipe instruction ticker for desktop hover */}
         <div className={`text-center mt-4 text-[10px] font-mono tracking-widest uppercase ${
           isDark ? 'text-gray-600' : 'text-gray-400'
         }`}>

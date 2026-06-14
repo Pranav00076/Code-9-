@@ -210,3 +210,30 @@ export const TESTIMONIALS_DATA: TestimonialItem[] = [
     rating: 5
   }
 ];
+
+export const SECTION_METADATA: Record<string, { title: string; dsc: string }> = {
+  home: {
+    title: "Code9 Community | Vanguard Developer Cooperative",
+    dsc: "Elite cooperative ecosystem for vanguard developers, digital architects, and systems engineers preparing the autonomous future."
+  },
+  manifesto: {
+    title: "The Manifesto | Code9 Community",
+    dsc: "Explore the Code9 Manifesto. Unleashing T-shaped technical talent through peer-to-peer co-shipping, rigorous mentorship circles, and paid sandbox challenges."
+  },
+  services: {
+    title: "Services & Tech Labs | Code9 Community",
+    dsc: "Discover our high-performing development labs focusing on highly-scalable Web Development (React/WASM), App Development, and curated Learning Resource Vaults."
+  },
+  nexus: {
+    title: "Nexus Collective | Code9 Community",
+    dsc: "Connect with Code9's expansive developer directory featuring over 500 vanguard members, interactive expert mentors, and elite shared projects."
+  },
+  projects: {
+    title: "Active Sandboxes & Builds | Code9 Community",
+    dsc: "View production prototypes, secure browser defense frameworks, and decentralization kernels shipped live by the Code9 cooperative."
+  },
+  benefits: {
+    title: "Community Benefits & Growth | Code9 Community",
+    dsc: "Accelerate your mastery. Master modern frontend capabilities, acquire paid workspace bounties, and access private expert layers."
+  }
+};

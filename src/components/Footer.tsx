@@ -24,7 +24,6 @@ export default function Footer({ isDark }: FooterProps) {
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
-        {/* Left Side: Logo and Copyright */}
         <div className="flex flex-col items-center md:items-start gap-2">
           <div className="logo font-display text-base font-extrabold tracking-tight flex items-center select-none">
             <span className="text-brand-cyan mr-0.5">{"{"}</span>
@@ -36,7 +35,6 @@ export default function Footer({ isDark }: FooterProps) {
           </div>
         </div>
 
-        {/* Middle: Social Icons */}
         <div className="flex items-center space-x-3">
           {socialIcons.map((soc) => (
             <motion.a
@@ -59,7 +57,6 @@ export default function Footer({ isDark }: FooterProps) {
           ))}
         </div>
 
-        {/* Right Side: Network Stats */}
         <div className="flex flex-col items-center md:items-end gap-1.5 text-[10px] font-mono opacity-60 uppercase tracking-widest">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />

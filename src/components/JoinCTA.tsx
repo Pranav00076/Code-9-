@@ -25,30 +25,24 @@ export default function JoinCTA({ isDark }: JoinCTAProps) {
 
   return (
     <section id="join" className="relative py-28 px-6 md:px-12 overflow-hidden z-25">
-      {/* Dynamic diagonal neon gradient slice background */}
       <div className="absolute inset-0 bg-[#07070a]/40 backdrop-blur-3xl pointer-events-none" />
       
-      {/* Background large neon blobs */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-gradient-to-r from-brand-blue/15 via-brand-cyan/20 to-brand-purple/15 blur-[120px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto relative z-10">
         
-        {/* Main Banner Case */}
         <div className={`rounded-3xl border p-8 md:p-16 relative overflow-hidden flex flex-col items-center text-center ${
           isDark 
             ? 'bg-gradient-to-br from-[#0c0c11] to-[#050507] border-white/5' 
             : 'bg-gradient-to-br from-white to-gray-50 border-black/5 shadow-2xl'
         }`}>
-          {/* Edge line laser light */}
           <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-purple" />
 
-          {/* Mini active node ticker */}
           <div className="flex items-center space-x-2 text-[10px] font-mono mb-6 text-brand-cyan uppercase tracking-widest font-bold">
             <Zap className="w-3 h-3 animate-bounce" />
             <span>NEXUS GATEWAY : CODE-9 PROMPTENTRY</span>
           </div>
 
-          {/* Large Title */}
           <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight uppercase leading-none mb-6 max-w-3xl">
             BECOME PART OF <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-purple">
@@ -56,14 +50,12 @@ export default function JoinCTA({ isDark }: JoinCTAProps) {
             </span>
           </h2>
 
-          {/* Supporting paragraph */}
           <p className={`text-sm sm:text-base font-light max-w-xl leading-relaxed mb-10 ${
             isDark ? 'text-gray-400' : 'text-gray-600'
           }`}>
             Submit your node parameters below to file an active entry petition. Our digital guilds review dossiers weekly. Secure terminal invitation.
           </p>
 
-          {/* Interactive Form Engine */}
           <AnimatePresence mode="wait">
             {status !== 'success' ? (
               <motion.form 
@@ -74,7 +66,6 @@ export default function JoinCTA({ isDark }: JoinCTAProps) {
                 exit={{ opacity: 0, y: -10 }}
                 className="w-full max-w-md flex flex-col sm:flex-row items-stretch gap-3 relative z-10"
               >
-                {/* Input node */}
                 <input 
                   type="email" 
                   value={email}
@@ -89,7 +80,6 @@ export default function JoinCTA({ isDark }: JoinCTAProps) {
                   }`}
                 />
 
-                {/* Submit button with loading text */}
                 <motion.button
                   type="submit"
                   disabled={status === 'submitting'}
@@ -136,7 +126,6 @@ export default function JoinCTA({ isDark }: JoinCTAProps) {
             )}
           </AnimatePresence>
 
-          {/* Minimal security disclaimer */}
           <div className="mt-8 text-[9px] font-mono text-gray-500 max-w-xs uppercase leading-normal tracking-wider">
             Zero telemetry leaked • Encrypted handshakes enabled • Decentralized verification queue
           </div>

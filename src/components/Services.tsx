@@ -29,11 +29,9 @@ export default function Services({ isDark }: ServicesProps) {
 
   return (
     <section id="services" className="relative py-24 px-6 md:px-12 overflow-hidden z-25">
-      {/* Glow highlight orb */}
       <div className={`absolute top-1/2 right-0 w-[450px] h-[450px] rounded-full blur-[130px] opacity-10 pointer-events-none bg-brand-cyan/40`} />
 
       <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="w-6 h-[2px] bg-brand-cyan" />
@@ -49,7 +47,6 @@ export default function Services({ isDark }: ServicesProps) {
           </p>
         </div>
 
-        {/* 4x2 Grid of services */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -80,7 +77,6 @@ export default function Services({ isDark }: ServicesProps) {
                     : 'none'
                 }}
               >
-                {/* Glowing neon edge based on hover state */}
                 <span 
                   className="absolute top-0 left-0 w-full h-[2px] transition-all duration-300"
                   style={{
@@ -90,7 +86,6 @@ export default function Services({ isDark }: ServicesProps) {
                 />
 
                 <div>
-                  {/* Top card elements: Icon and tag */}
                   <div className="flex items-center justify-between mb-6">
                     <div 
                       className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 relative overflow-hidden"
@@ -101,7 +96,6 @@ export default function Services({ isDark }: ServicesProps) {
                       }}
                     >
                       <LucideIcon name={service.iconName} className="w-5 h-5 relative z-10" />
-                      {/* Deep internal pulsing dot in the icon frame */}
                       <span 
                         className="absolute inset-0 rounded-xl animate-pulse opacity-20"
                         style={{ backgroundColor: service.color }}
@@ -119,21 +113,18 @@ export default function Services({ isDark }: ServicesProps) {
                     </span>
                   </div>
 
-                  {/* Title */}
                   <h3 className={`text-base font-bold font-display uppercase tracking-tight mb-3 ${
                     isDark ? 'text-white' : 'text-gray-900'
                   }`}>
                     {service.title}
                   </h3>
 
-                  {/* Description */}
                   <p className={`text-xs font-light leading-relaxed mb-4 ${
                     isDark ? 'text-gray-400' : 'text-gray-600'
                   }`}>
                     {service.description}
                   </p>
 
-                  {/* Skill level progression for Web Dev, App Dev, and Learning Resources */}
                   {(service.id === 'web-dev' || service.id === 'app-dev' || service.id === 'learning') && (
                     <div className="mt-4 flex flex-col gap-1.5 z-10 relative">
                       <div className={`flex items-center justify-between font-mono text-[9px] uppercase tracking-widest leading-none ${
@@ -166,7 +157,6 @@ export default function Services({ isDark }: ServicesProps) {
                   )}
                 </div>
 
-                {/* Interactive slide icon */}
                 <div className="mt-6 flex items-center justify-end text-[10px] font-mono tracking-widest font-semibold uppercase relative group cursor-pointer">
                   <span 
                     className="mr-2 transition-all duration-300 opacity-0 transform translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"

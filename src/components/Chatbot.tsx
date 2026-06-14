@@ -11,18 +11,15 @@ interface ChatbotProps {
   isDark: boolean;
 }
 
-// Custom lightweight high-craft text formatter to parse markdown style logs
 function FormattedMessage({ text, isUser, isDark }: { text: string; isUser: boolean; isDark: boolean }) {
   if (isUser) {
     return <span className="text-xs font-light">{text}</span>;
   }
 
-  // Parse paragraphs, code lines, bold lists
   const lines = text.split('\n');
   return (
     <div className="space-y-2 text-xs font-light leading-relaxed">
       {lines.map((line, lIdx) => {
-        // Bullet list item
         if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
           const content = line.trim().substring(2);
           return (
@@ -32,12 +29,10 @@ function FormattedMessage({ text, isUser, isDark }: { text: string; isUser: bool
           );
         }
 
-        // Horizontal Rule
         if (line.trim() === '---') {
           return <hr key={lIdx} className={`my-2 border-dashed ${isDark ? 'border-white/10' : 'border-black/10'}`} />;
         }
 
-        // Standard text lines
         if (line.trim() === '') return <div key={lIdx} className="h-1" />;
         return <p key={lIdx}>{parseInlineMarkdown(line)}</p>;
       })}
@@ -45,12 +40,10 @@ function FormattedMessage({ text, isUser, isDark }: { text: string; isUser: bool
   );
 }
 
-// Format bold text **word** and code `code`
 function parseInlineMarkdown(text: string) {
   const parts = [];
   let tempText = text;
   
-  // Basic RegExp to slice bold structures and inline code blocks
   const regex = /(\*\*.*?\*\*|`.*?`)/g;
   const splitText = tempText.split(regex);
 
@@ -85,14 +78,12 @@ export default function Chatbot({ isDark }: ChatbotProps) {
 
   const initialGreeting = 'Greetings, digital pioneer. I am the Code9 Cybernetic Assistant. Connect with my neural core and ask me anything about Code9 communities, labs, or available vectors.';
 
-  // Initialize with greeting
   useEffect(() => {
     setMessages([
       { role: 'assistant', content: initialGreeting }
     ]);
   }, []);
 
-  // Pull focus to input of the conversational node when opened
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
@@ -101,7 +92,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
     }
   }, [isOpen]);
 
-  // Auto scroll to bottom
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -180,7 +170,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
 
   return (
     <div className="fixed bottom-6 right-6 z-45 flex flex-col items-end">
-      {/* Expanded Chat Dialog Panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -194,7 +183,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
                 : 'bg-white/95 border-black/10 text-black shadow-[0_12px_45px_rgba(139,92,246,0.14)]'
             }`}
           >
-            {/* Header section with glowing indicator */}
             <div className={`p-4 border-b flex items-center justify-between ${
               isDark ? 'border-white/5 bg-black/40' : 'border-black/5 bg-gray-50'
             }`}>
@@ -214,9 +202,7 @@ export default function Chatbot({ isDark }: ChatbotProps) {
                 </div>
               </div>
 
-              {/* Utility Tools */}
               <div className="flex items-center space-x-1">
-                {/* Reset dialogue */}
                 <button 
                   onClick={handleResetConversation}
                   title="Reset secure connection"
@@ -229,7 +215,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
                   <RotateCcw className="w-3.5 h-3.5" />
                 </button>
 
-                {/* Close Button */}
                 <button 
                   onClick={() => setIsOpen(false)}
                   className={`p-1.5 rounded-lg border transition-all ${
@@ -242,7 +227,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
               </div>
             </div>
 
-            {/* Chat message content track */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
               {messages.map((msg, idx) => {
                 const isUser = msg.role === 'user';
@@ -266,7 +250,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
                 );
               })}
 
-              {/* Loader/Typing indicator */}
               {isTyping && (
                 <div className="flex justify-start">
                   <div className={`rounded-xl px-4 py-3 border rounded-bl-none flex items-center space-x-1.5 ${
@@ -279,7 +262,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
                 </div>
               )}
 
-              {/* Error prompt indicator */}
               {hasError && (
                 <div className={`p-3.5 rounded-xl border flex items-start gap-2.5 bg-red-950/20 text-red-400 border-red-900/40 text-[10.5px] font-mono leading-normal`}>
                   <ShieldAlert className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
@@ -295,10 +277,8 @@ export default function Chatbot({ isDark }: ChatbotProps) {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Suggestions & user action panel */}
             <div className={`p-4 border-t ${isDark ? 'border-white/5' : 'border-black/5'}`}>
               
-              {/* Context prompt chips list -- visible ALWAYS or when active, collapsible or small */}
               <div className="flex flex-col gap-2 mb-3">
                 <div className="flex items-center justify-between px-1">
                   <span className={`text-[9px] font-mono tracking-widest uppercase flex items-center gap-1 ${
@@ -325,7 +305,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
                 </div>
               </div>
 
-              {/* Input Form Box */}
               <form 
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -363,7 +342,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
                 </motion.button>
               </form>
               
-              {/* Soft Hint */}
               <p className={`text-[8.5px] font-mono text-center mt-3 tracking-wider uppercase opacity-40`}>
                 Shift + Enter for break • Cipher Active Node
               </p>
@@ -373,7 +351,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
         )}
       </AnimatePresence>
 
-      {/* Floating Spark Launcher Trigger Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.08 }}
@@ -404,7 +381,6 @@ export default function Chatbot({ isDark }: ChatbotProps) {
               className="relative"
             >
               <MessageSquare className="w-6 h-6" />
-              {/* Little active signal light */}
               <span className="absolute top-0 right-0 w-2.5 h-2.5 rounded-full bg-green-500 border-2 border-slate-900" />
             </motion.div>
           )}
