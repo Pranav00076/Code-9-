@@ -25,7 +25,7 @@ export default function Projects({ isDark }: ProjectsProps) {
   };
 
   return (
-    <section id="projects" className="relative py-24 px-6 md:px-12 overflow-hidden z-25">
+    <section id="projects" className="relative pt-32 pb-24 min-h-screen px-6 md:px-12 overflow-hidden z-25">
       <div className={`absolute top-0 right-1/4 w-96 h-96 rounded-full blur-[140px] opacity-10 pointer-events-none bg-brand-cyan/30`} />
 
       <div className="max-w-7xl mx-auto relative">

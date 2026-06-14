@@ -6,6 +6,8 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import ChartsSection from './components/ChartsSection';
 import GamingSection from './components/GamingSection';
+import Projects from './components/Projects';
+import Benefits from './components/Benefits';
 import ActivityFeed from './components/ActivityFeed';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
@@ -225,6 +227,8 @@ export default function App() {
                 <Route path="/" element={<Home isDark={isDark} />} />
                 <Route path="/charts" element={<ChartsSection isDark={isDark} />} />
                 <Route path="/gaming" element={<GamingSection isDark={isDark} />} />
+                <Route path="/projects" element={<Projects isDark={isDark} />} />
+                <Route path="/benefits" element={<Benefits isDark={isDark} />} />
               </Routes>
             </main>
 

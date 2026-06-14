@@ -25,7 +25,7 @@ export default function Benefits({ isDark }: BenefitsProps) {
   };
 
   return (
-    <section id="benefits" className="relative py-24 px-6 md:px-12 overflow-hidden z-25">
+    <section id="benefits" className="relative pt-32 pb-24 min-h-screen px-6 md:px-12 overflow-hidden z-25">
       <div className={`absolute bottom-0 left-10 w-96 h-96 rounded-full blur-[140px] opacity-10 pointer-events-none bg-brand-purple/40`} />
 
       <div className="max-w-7xl mx-auto relative">

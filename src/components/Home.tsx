@@ -2,9 +2,7 @@ import React from 'react';
 import Hero from './Hero';
 import About from './About';
 import Services from './Services';
-import Benefits from './Benefits';
 import CareerPath from './CareerPath';
-import Projects from './Projects';
 import ChallengeArena from './ChallengeArena';
 import Testimonials from './Testimonials';
 import JoinCTA from './JoinCTA';
@@ -19,9 +17,7 @@ export default function Home({ isDark }: HomeProps) {
       <Hero isDark={isDark} />
       <About isDark={isDark} />
       <Services isDark={isDark} />
-      <Benefits isDark={isDark} />
       <CareerPath isDark={isDark} />
-      <Projects isDark={isDark} />
       <ChallengeArena isDark={isDark} />
       <Testimonials isDark={isDark} />
       <JoinCTA isDark={isDark} />

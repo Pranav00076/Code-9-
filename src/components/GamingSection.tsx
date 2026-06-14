@@ -27,8 +27,8 @@ export default function GamingSection({ isDark }: GamingSectionProps) {
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const root = document.documentElement;
-      let mouseX = e.clientX - rect.left - root.scrollLeft;
+      const scaleX = canvas.width / rect.width;
+      let mouseX = (e.clientX - rect.left) * scaleX;
       paddle.x = mouseX - paddle.width / 2;
       
       // Keep paddle inside canvas
@@ -90,7 +90,7 @@ export default function GamingSection({ isDark }: GamingSectionProps) {
         ball.dx = hitPoint * 0.15;
         currentScore += 10;
         setScore(currentScore);
-        if (currentScore > highScore) setHighScore(currentScore);
+        setHighScore(prev => currentScore > prev ? currentScore : prev);
       }
 
       // Game Over (bottom wall)
@@ -108,7 +108,7 @@ export default function GamingSection({ isDark }: GamingSectionProps) {
       cancelAnimationFrame(animationFrameId);
       canvas.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [isPlaying, isDark, highScore]);
+  }, [isPlaying, isDark]);
 
   const startGame = () => {
     setScore(0);
