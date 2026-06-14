@@ -1,0 +1,8 @@
+{
+  "name": "Code9 Community",
+  "description": "A premium, futuristic landing page for the Code9 Community with an ultra-modern UI, glassmorphic styling, neon glows, scroll animations, dynamic stats, projects slider, and timeline benefits.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
