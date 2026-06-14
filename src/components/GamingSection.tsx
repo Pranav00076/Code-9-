@@ -36,7 +36,7 @@ export default function GamingSection({ isDark }: GamingSectionProps) {
       if (paddle.x + paddle.width > canvas.width) paddle.x = canvas.width - paddle.width;
     };
 
-    canvas.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove);
 
     const draw = () => {
       // Clear canvas
@@ -84,7 +84,8 @@ export default function GamingSection({ isDark }: GamingSectionProps) {
         ball.x > paddle.x &&
         ball.x < paddle.x + paddle.width
       ) {
-        ball.dy = -ball.dy;
+        ball.dy = -Math.abs(ball.dy);
+        ball.y = paddle.y - ball.radius; // Push ball out of paddle to prevent getting stuck
         // Add a bit of speed increase and angle change based on where it hit
         let hitPoint = ball.x - (paddle.x + paddle.width / 2);
         ball.dx = hitPoint * 0.15;
@@ -106,7 +107,7 @@ export default function GamingSection({ isDark }: GamingSectionProps) {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      canvas.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [isPlaying, isDark]);
 

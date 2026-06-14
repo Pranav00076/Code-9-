@@ -25,8 +25,8 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
     { name: 'Home', href: '/' },
     { name: 'Charts', href: '/charts' },
     { name: 'Gaming', href: '/gaming' },
-    { name: 'Projects', href: '/#projects' },
-    { name: 'Benefits', href: '/#benefits' }
+    { name: 'Projects', href: '/projects' },
+    { name: 'Benefits', href: '/benefits' }
   ];
 
   const logoVariant = {
