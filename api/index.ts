@@ -17,9 +17,16 @@ app.post('/api/chatbot', async (req, res) => {
 
     const hfToken = process.env.HF_TOKEN;
     if (!hfToken) {
-      res.status(500).json({ 
-        error: 'HF_TOKEN is not configured on the server. Please add it to your secrets or .env.' 
-      });
+      // Mock response if no token
+      setTimeout(() => {
+        res.json({
+          choices: [{
+            message: {
+              content: `[Mock Node Active] The neural link is offline, but I can tell you that Code9 is an elite cooperative ecosystem for vanguard developers. Connect your HF_TOKEN to unleash my full cognitive capabilities.`
+            }
+          }]
+        });
+      }, 1500);
       return;
     }
 

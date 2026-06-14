@@ -29,8 +29,17 @@ export default function Benefits({ isDark }: BenefitsProps) {
       <div className={`absolute bottom-0 left-10 w-96 h-96 rounded-full blur-[140px] opacity-10 pointer-events-none bg-brand-purple/40`} />
 
       <div className="max-w-7xl mx-auto relative">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="absolute top-0 left-1/2 transform -translate-x-1/2 text-[150px] font-black font-display opacity-[0.02] pointer-events-none select-none tracking-widest uppercase z-0"
+        >
+          COLLABORATE
+        </motion.div>
         
-        <div className="text-center max-w-2xl mx-auto mb-20">
+        <div className="text-center max-w-2xl mx-auto mb-20 relative z-10">
           <div className="inline-flex items-center gap-2 mb-4">
             <span className="w-8 h-[1px] bg-brand-cyan" />
             <span className="text-[10px] font-mono tracking-widest text-[#06B6D4] font-bold uppercase">The Nexus Pipeline</span>

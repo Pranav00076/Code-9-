@@ -6,7 +6,10 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import Benefits from './components/Benefits';
+import CareerPath from './components/CareerPath';
+import ActivityFeed from './components/ActivityFeed';
 import Projects from './components/Projects';
+import ChallengeArena from './components/ChallengeArena';
 import Testimonials from './components/Testimonials';
 import JoinCTA from './components/JoinCTA';
 import Footer from './components/Footer';
@@ -77,12 +80,32 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const [easterEggUnlocked, setEasterEggUnlocked] = useState(false);
+
   useEffect(() => {
     const updateMousePos = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener('mousemove', updateMousePos);
     return () => window.removeEventListener('mousemove', updateMousePos);
+  }, []);
+
+  useEffect(() => {
+    let keySequence = '';
+    const secretCode = 'nexus';
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      keySequence += e.key.toLowerCase();
+      if (keySequence.length > secretCode.length) {
+        keySequence = keySequence.slice(-secretCode.length);
+      }
+      if (keySequence === secretCode) {
+        setEasterEggUnlocked(true);
+        setTimeout(() => setEasterEggUnlocked(false), 5000); // Hide after 5 seconds
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   const handleToggleTheme = () => {
@@ -106,6 +129,31 @@ export default function App() {
           <meta name="twitter:title" content={metadata.title} />
           <meta name="twitter:description" content={metadata.dsc} />
         </Helmet>
+
+        {/* Global Background Upgrade */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+          <motion.div 
+            animate={{ 
+              x: [0, 100, 0, -100, 0], 
+              y: [0, 50, 100, 50, 0],
+              rotate: [0, 45, 90, 45, 0]
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full opacity-[0.03]"
+            style={{ background: 'radial-gradient(circle, #06B6D4 0%, transparent 70%)' }}
+          />
+          <motion.div 
+            animate={{ 
+              x: [0, -100, 0, 100, 0], 
+              y: [0, -50, -100, -50, 0],
+              rotate: [0, -45, -90, -45, 0]
+            }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[60%] left-[60%] w-[60%] h-[60%] rounded-full opacity-[0.03]"
+            style={{ background: 'radial-gradient(circle, #8B5CF6 0%, transparent 70%)' }}
+          />
+        </div>
+
       <AnimatePresence mode="wait">
         {isLoading ? (
           <motion.div
@@ -186,7 +234,11 @@ export default function App() {
               
               <Benefits isDark={isDark} />
               
+              <CareerPath isDark={isDark} />
+              
               <Projects isDark={isDark} />
+              
+              <ChallengeArena isDark={isDark} />
               
               <Testimonials isDark={isDark} />
               
@@ -195,7 +247,28 @@ export default function App() {
 
             <Footer isDark={isDark} />
 
+            <ActivityFeed isDark={isDark} />
             <Chatbot isDark={isDark} />
+
+            <AnimatePresence>
+              {easterEggUnlocked && (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.5, y: 50 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.5, y: -50 }}
+                  className="fixed top-24 left-1/2 transform -translate-x-1/2 z-[100] pointer-events-none"
+                >
+                  <div className="bg-brand-purple/20 border-2 border-brand-purple backdrop-blur-xl px-8 py-4 rounded-2xl flex items-center gap-4 shadow-[0_0_50px_rgba(139,92,246,0.6)]">
+                    <span className="text-4xl animate-bounce">🏆</span>
+                    <div>
+                      <h3 className="font-display font-black text-white uppercase tracking-widest">Nexus Unlocked</h3>
+                      <p className="text-brand-cyan font-mono text-xs uppercase tracking-wider">Secret Sequence Accepted</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
           </motion.div>
         )}
       </AnimatePresence>

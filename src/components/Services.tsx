@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { SERVICES_DATA } from '../data';
 import LucideIcon from './LucideIcon';
@@ -9,33 +9,38 @@ interface ServicesProps {
 
 export default function Services({ isDark }: ServicesProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [rotation, setRotation] = useState(0);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
-    }
-  };
+  // Slow continuous rotation
+  useEffect(() => {
+    let animationFrameId: number;
+    let currentRotation = 0;
+    
+    const animate = () => {
+      currentRotation += 0.05;
+      setRotation(currentRotation);
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
 
   return (
-    <section id="services" className="relative py-24 px-6 md:px-12 overflow-hidden z-25">
+    <section id="services" className="relative py-32 px-6 md:px-12 overflow-hidden z-25 min-h-[900px] flex flex-col items-center">
       <div className={`absolute top-1/2 right-0 w-[450px] h-[450px] rounded-full blur-[130px] opacity-10 pointer-events-none bg-brand-cyan/40`} />
 
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+      <div className="max-w-7xl mx-auto w-full z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-2xl mx-auto mb-20"
+        >
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="w-6 h-[2px] bg-brand-cyan" />
-            <span className="text-[10px] font-mono tracking-widest text-brand-cyan uppercase font-bold">Offerings & Labs</span>
+            <span className="text-[10px] font-mono tracking-widest text-brand-cyan uppercase font-bold">Interactive Skill Galaxy</span>
             <div className="w-6 h-[2px] bg-brand-cyan" />
           </div>
           
@@ -43,141 +48,127 @@ export default function Services({ isDark }: ServicesProps) {
             SYSTEM CAPABILITIES
           </h2>
           <p className={`text-sm font-light ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Exquisite codebases, deterministic optimization, firmware integration protocols, and direct career vector projection. Select a node to observe its matrix parameters.
+            Exquisite codebases, deterministic optimization, firmware integration protocols, and direct career vector projection.
           </p>
-        </div>
+        </motion.div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
+        <div className="relative w-full h-[600px] flex items-center justify-center mt-10">
+          
+          {/* Central Core */}
+          <motion.div 
+            className={`absolute z-20 w-32 h-32 rounded-full border-2 flex items-center justify-center backdrop-blur-md shadow-[0_0_50px_rgba(6,182,212,0.3)] ${
+              isDark ? 'border-white/10 bg-black/50' : 'border-black/10 bg-white/50'
+            }`}
+            animate={{ scale: [1, 1.05, 1], boxShadow: ['0 0 30px rgba(6,182,212,0.3)', '0 0 60px rgba(139,92,246,0.5)', '0 0 30px rgba(6,182,212,0.3)'] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="font-display text-2xl font-black flex items-center tracking-widest">
+              <span className="text-brand-cyan mr-1 animate-pulse">{"{"}</span>
+              <span className={isDark ? 'text-white' : 'text-black'}>C9</span>
+              <span className="text-brand-purple ml-1 animate-pulse">{"}"}</span>
+            </div>
+          </motion.div>
+
+          {/* Orbiting Nodes */}
           {SERVICES_DATA.map((service, index) => {
+            const angle = (index * (360 / SERVICES_DATA.length));
             const isHovered = hoveredIndex === index;
+            
+            // Orbit Math
+            const radius = 280; // Distance from center
+            // Apply rotation, but freeze if a node is hovered
+            const currentAngle = hoveredIndex !== null ? angle : angle + rotation;
+            const radian = (currentAngle * Math.PI) / 180;
+            const x = Math.cos(radian) * radius;
+            const y = Math.sin(radian) * radius;
+
             return (
               <motion.div
                 key={service.id}
-                variants={cardVariants}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.3 }}
-                className={`card rounded-2xl p-6 backdrop-blur-xl border flex flex-col justify-between relative overflow-hidden transition-all duration-300 min-h-[260px] ${
-                  isDark 
-                    ? 'border-white/5 bg-[#0b0b0def] hover:border-white/20' 
-                    : 'border-black/5 bg-white/80 hover:border-black/20 hover:shadow-lg'
-                }`}
-                style={{
-                  boxShadow: isHovered && isDark
-                    ? `0 10px 30px -10px ${service.color}40, 0 1px 3px ${service.color}20`
-                    : isHovered && !isDark
-                    ? `0 10px 30px -10px ${service.color}30, 0 1px 3px ${service.color}15`
-                    : 'none'
-                }}
+                animate={{ x, y, scale: isHovered ? 1.05 : 1, zIndex: isHovered ? 30 : 10 }}
+                transition={{ type: "tween", ease: "linear", duration: 0.1 }}
+                className="absolute"
               >
-                <span 
-                  className="absolute top-0 left-0 w-full h-[2px] transition-all duration-300"
+                {/* Connecting Line from Center to Node (Approximated with a scaled div rotated towards center) */}
+                <div 
+                  className="absolute top-1/2 left-1/2 origin-left"
                   style={{
-                    background: `linear-gradient(90deg, transparent, ${service.color}, transparent)`,
-                    opacity: isHovered ? 1 : 0
+                    width: radius - 64, // Subtract node radius
+                    height: 1,
+                    background: `linear-gradient(90deg, transparent, ${service.color}40)`,
+                    transform: `translateY(-50%) rotate(${180}deg)`,
+                    opacity: isHovered ? 0.8 : 0.2,
+                    zIndex: -1
                   }}
                 />
 
-                <div>
-                  <div className="flex items-center justify-between mb-6">
+                <div 
+                  className={`w-64 p-5 rounded-2xl backdrop-blur-xl border cursor-pointer transition-all duration-300 relative group overflow-hidden ${
+                    isDark ? 'bg-[#0b0b0def] border-white/10' : 'bg-white/90 border-black/10'
+                  }`}
+                  style={{
+                    boxShadow: isHovered ? `0 0 30px ${service.color}40` : 'none',
+                    borderColor: isHovered ? service.color : undefined
+                  }}
+                >
+                  <div className="flex items-center gap-3 mb-3 relative z-10">
                     <div 
-                      className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 relative overflow-hidden"
-                      style={{ 
-                        background: `${service.color}15`,
-                        color: service.color,
-                        transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1)'
-                      }}
+                      className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300"
+                      style={{ background: `${service.color}20`, color: service.color, transform: isHovered ? 'rotate(10deg)' : 'none' }}
                     >
-                      <LucideIcon name={service.iconName} className="w-5 h-5 relative z-10" />
+                      <LucideIcon name={service.iconName} className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className={`text-sm font-bold font-display uppercase tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                        {service.title}
+                      </h3>
                       <span 
-                        className="absolute inset-0 rounded-xl animate-pulse opacity-20"
-                        style={{ backgroundColor: service.color }}
-                      />
+                        className="text-[8px] font-mono font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
+                        style={{ backgroundColor: `${service.color}15`, color: service.color }}
+                      >
+                        {service.tag}
+                      </span>
                     </div>
-
-                    <span 
-                      className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded"
-                      style={{ 
-                        backgroundColor: `${service.color}10`,
-                        color: service.color
-                      }}
-                    >
-                      {service.tag}
-                    </span>
                   </div>
 
-                  <h3 className={`text-base font-bold font-display uppercase tracking-tight mb-3 ${
-                    isDark ? 'text-white' : 'text-gray-900'
-                  }`}>
-                    {service.title}
-                  </h3>
-
-                  <p className={`text-xs font-light leading-relaxed mb-4 ${
-                    isDark ? 'text-gray-400' : 'text-gray-600'
-                  }`}>
-                    {service.description}
-                  </p>
-
-                  {(service.id === 'web-dev' || service.id === 'app-dev' || service.id === 'learning') && (
-                    <div className="mt-4 flex flex-col gap-1.5 z-10 relative">
-                      <div className={`flex items-center justify-between font-mono text-[9px] uppercase tracking-widest leading-none ${
-                        isDark ? 'text-[#a1a1aa]' : 'text-gray-600 font-semibold'
-                      }`}>
-                        <span className="flex items-center gap-1">
-                          <span className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
-                          Skill Cap
-                        </span>
-                        <span style={{ color: service.color }} className="font-bold">
-                          {service.id === 'web-dev' ? '95%' : service.id === 'app-dev' ? '92%' : '88%'}
-                        </span>
-                      </div>
-                      <div className={`w-full h-[5px] rounded-full overflow-hidden relative ${isDark ? 'bg-gray-950/80' : 'bg-gray-100'}`}>
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          whileInView={{ 
-                            width: service.id === 'web-dev' ? '95%' : service.id === 'app-dev' ? '92%' : '88%' 
-                          }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.15 }}
-                          className="h-full rounded-full relative"
-                          style={{ 
-                            backgroundColor: service.color,
-                            boxShadow: `0 0 8px ${service.color}`
-                          }}
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="mt-6 flex items-center justify-end text-[10px] font-mono tracking-widest font-semibold uppercase relative group cursor-pointer">
-                  <span 
-                    className="mr-2 transition-all duration-300 opacity-0 transform translate-x-1 group-hover:opacity-100 group-hover:translate-x-0"
-                    style={{ color: service.color }}
+                  {/* Expanded Content on Hover */}
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: isHovered ? 'auto' : 0, opacity: isHovered ? 1 : 0 }}
+                    className="overflow-hidden"
                   >
-                    Details
-                  </span>
-                  <div 
-                    className="w-5 h-5 rounded-full flex items-center justify-center border transition-all duration-300"
-                    style={{ 
-                      borderColor: isHovered ? service.color : 'rgba(128,128,128,0.2)',
-                      color: isHovered ? service.color : 'gray'
-                    }}
-                  >
-                    →
-                  </div>
+                    <p className={`text-xs font-light leading-relaxed mb-3 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {service.description}
+                    </p>
+
+                    {(service.id === 'web-dev' || service.id === 'app-dev' || service.id === 'learning') && (
+                      <div className="flex flex-col gap-1.5 mt-2">
+                        <div className={`flex items-center justify-between font-mono text-[9px] uppercase tracking-widest leading-none ${isDark ? 'text-[#a1a1aa]' : 'text-gray-600'}`}>
+                          <span>Skill Cap</span>
+                          <span style={{ color: service.color }} className="font-bold">
+                            {service.id === 'web-dev' ? '95%' : service.id === 'app-dev' ? '92%' : '88%'}
+                          </span>
+                        </div>
+                        <div className={`w-full h-1 rounded-full overflow-hidden ${isDark ? 'bg-gray-800' : 'bg-gray-200'}`}>
+                          <div 
+                            className="h-full rounded-full"
+                            style={{ 
+                              width: service.id === 'web-dev' ? '95%' : service.id === 'app-dev' ? '92%' : '88%',
+                              backgroundColor: service.color,
+                              boxShadow: `0 0 8px ${service.color}`
+                            }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
                 </div>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

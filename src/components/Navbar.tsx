@@ -32,6 +32,13 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
     hover: { scale: 1.05 }
   };
 
+  const [clicks, setClicks] = useState(0);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setClicks(c => c + 1);
+  };
+
   return (
     <header 
       style={{
@@ -51,9 +58,11 @@ export default function Navbar({ isDark, onToggleTheme, scrollProgress }: Navbar
 
       <motion.a 
         href="#"
-        variants={logoVariant}
-        whileHover="hover"
-        className="logo font-display text-2xl font-black tracking-tight flex items-center select-none"
+        onClick={handleLogoClick}
+        animate={clicks > 3 ? { rotate: 360, filter: 'hue-rotate(90deg)' } : {}}
+        transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
+        onAnimationComplete={() => { if (clicks > 3) setClicks(0) }}
+        className="logo font-display text-2xl font-black tracking-tight flex items-center select-none cursor-pointer hover:scale-105 transition-transform"
       >
         <span className="text-brand-cyan mr-1 font-mono font-bold animate-pulse">{"{"}</span>
         <span className={`${isDark ? 'text-[#F8FAFC]' : 'text-[#0A0A0A]'} font-extrabold mr-1 tracking-wider`}>CODE9</span>
