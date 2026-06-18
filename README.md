@@ -1,7 +1,5 @@
 # 🌐 Code-9- Community Ecosystem
 
-![Code-9- Hero Banner](https://ai.google.dev/static/site-assets/images/share-ais-513315318.png)
-
 > **Code-9-** is an elite, multi-disciplinary, cybernetic ecosystem for vanguard developers, creators, systems engineers, and digital architects preparing for the autonomous future. 
 
 This application serves as the interactive landing page, digital gateway, and neural connection point for prospective Code-9- community members. It features a high-craft, cyberpunk-inspired visual language, smooth micro-animations, and a fully functional AI-powered Chatbot Assistant capable of answering questions about the Code-9- ecosystem.
