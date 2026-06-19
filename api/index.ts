@@ -1,10 +1,43 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import { Enquiry } from './models/Enquiry.js';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+const MONGODB_URI = process.env.MONGODB_URI;
+if (MONGODB_URI) {
+  mongoose.connect(MONGODB_URI)
+    .then(() => console.log('[CODE9] Connected to MongoDB via Mongoose'))
+    .catch((err) => console.error('MongoDB connection error:', err));
+} else {
+  console.log('[CODE9] MONGODB_URI not found. Starting without database.');
+}
+
+app.post('/api/enquiry', async (req, res) => {
+  try {
+    const { name, email, role, message } = req.body;
+
+    if (!name || !email || !role) {
+      res.status(400).json({ error: 'Name, email, and role are required.' });
+      return;
+    }
+
+    if (mongoose.connection.readyState === 1) {
+      const enquiry = new Enquiry({ name, email, role, message });
+      await enquiry.save();
+      res.status(201).json({ success: true, message: 'Registration submitted successfully.', data: enquiry });
+    } else {
+      res.status(201).json({ success: true, message: 'Registration received (DB disconnected).' });
+    }
+  } catch (err: any) {
+    console.error('Enquiry endpoint error:', err);
+    res.status(500).json({ error: 'Internal Server Error', message: err.message });
+  }
+});
 
 app.post('/api/chatbot', async (req, res) => {
   try {

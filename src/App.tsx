@@ -12,6 +12,7 @@ import ActivityFeed from './components/ActivityFeed';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import CursorTrail from './components/CursorTrail';
+import EnquiryForm from './components/EnquiryForm';
 import { SECTION_METADATA } from './data';
 
 
@@ -229,6 +230,7 @@ export default function App() {
                 <Route path="/gaming" element={<GamingSection isDark={isDark} />} />
                 <Route path="/projects" element={<Projects isDark={isDark} />} />
                 <Route path="/benefits" element={<Benefits isDark={isDark} />} />
+                <Route path="/enquiry" element={<EnquiryForm isDark={isDark} />} />
               </Routes>
             </main>
 
